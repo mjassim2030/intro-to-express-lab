@@ -1,9 +1,23 @@
 const express = require("express")
-const collectibles = require("./collectibles")
-const shoesCollection = require("./shoes")
 
 const app = express()
 const PORT = 3000
+
+const collectibles = [
+    { name: 'shiny ball', price: 5.95 },
+    { name: 'autographed picture of a dog', price: 10 },
+    { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
+];
+
+const shoes = [
+    { name: "Birkenstocks", price: 50, type: "sandal" },
+    { name: "Air Jordans", price: 500, type: "sneaker" },
+    { name: "Air Mahomeses", price: 501, type: "sneaker" },
+    { name: "Utility Boots", price: 20, type: "boot" },
+    { name: "Velcro Sandals", price: 15, type: "sandal" },
+    { name: "Jet Boots", price: 1000, type: "boot" },
+    { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+];
 
 // Routes
 app.get('/', (req, res) => {
@@ -66,9 +80,9 @@ app.get('/shoes', (req, res) => {
     const maxPrice = parseInt(req.query['max-price'])
     const shoesType = req.query['type']
 
-    let newShoesCollection = shoesCollection
+    let newShoesCollection = shoes
 
-    newShoesCollection = shoesCollection.filter(shoe => {
+    newShoesCollection = shoes.filter(shoe => {
         return (!minPrice || shoe.price >= minPrice) && (!maxPrice || shoe.price <= maxPrice) && (!shoesType || shoe.type === shoesType)
     });
 
